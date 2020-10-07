@@ -1,0 +1,66 @@
+
+body {
+    background-image: url(../img/fondo.png);
+    color: yellow;
+    font-family: fantasy;
+    font-weight: bold;
+}
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.pokemon__img {
+    width:15rem;
+    margin-top: 3rem;
+}
+
+.ganador__tamano {
+    width: 17rem;
+    border-radius: 8rem;
+    box-shadow: 4px -5px 22px 45px rgba(243,255,18,1);
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 6rem;
+}
+
+.marcador {
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: .5rem;
+}
+
+input {
+    border: 3px solid black;
+    font-weight: bold;
+    width: 3rem;
+}
+
+.esquirtel__inputs, .bulbasur__inputs {
+    display:flex;
+    flex-direction:column;
+}
+
+.start {
+    display: flex;
+    justify-content:center
+}
+
+.start__button {
+    width:13rem;
+}
+
+.start__button:hover {
+    width: 15rem;
+}
+
+.fondoNaranja {
+    background-color: orange;
+    color:black;
+    padding: 1rem;
+    border-radius: 3rem;
+}

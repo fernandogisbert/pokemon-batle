@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokecombat</title>
+    <link rel="stylesheet" href="style/desktop.css" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <main class="main">
+        
+            <div class="esquirtel">
+                <div class="esquirtel__inputs">
+                    <label class="marcador">
+                        Vida    
+                        <input id="vida__esquirtel"  max="20" type="number">
+                    </label>
+                    <label class="marcador">
+                        Ataque
+                        <input id="ataque__esquirtel"  max="10" type="number">
+                    </label>
+                    <label class="marcador">
+                        Defensa
+                        <input id="defensa__esquirtel"  max="5" type="number">
+                    </label>
+                </div>
+                <img class="pokemon__img " id="squirtelId" src="img/squirtel-removebg-preview.png" alt="squirtel">
+
+            </div>
+            <div id="battle__ring">
+                <div id="battle__transcurso">
+                </div>
+                <div id="battle__result">
+                </div>
+            </div>
+            <div class="bulbasur">
+                <div class="bulbasur__inputs">
+                    <label class="marcador">
+                        Vida
+                        <input id="vida__bulbasur"  max="20" type="number">
+                    </label>
+                    <label class="marcador">
+                        Ataque
+                        <input id="ataque__bulbasur"  max="10" type="number">
+                    </label>
+                    <label class="marcador">
+                        Defensa
+                        <input id="defensa__bulbasur"  max="5" type="number">
+                    </label class="marcador">
+                </div>
+                <img class="pokemon__img " id="bulsaurId" src="img/bulbasur-removebg-preview.png" alt="bulbasur">
+
+            </div>
+        
+        </main>
+        <div class="start">
+            <img class="start__button" id="boton__luchar" src="img/start.png" alt="empezar">
+        </div>
+    </div>
+    
+    <script src="JS/codigo.js"></script>
+</body>
+</html>
