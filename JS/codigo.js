@@ -90,4 +90,4 @@ function luchar() {
 
 }
 
-botonLuchar.addEventListener('click', luchar);
+botonLuchar.addEventListener('click', luchar());
