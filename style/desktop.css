@@ -10,6 +10,14 @@ body {
     margin: 0 auto;
 }
 
+.trainer {
+    background-color:red;
+    border: 2px solid black;
+    margin-bottom:1rem;
+    padding-left: 1rem;
+    display:flex;
+    justify-content:space-between;
+}
 .pokemon__img {
     width:15rem;
     margin-top: 3rem;
@@ -24,8 +32,7 @@ body {
 .main {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding-top: 6rem;
+    align-items: flex-start;
 }
 
 .marcador {

@@ -1,4 +1,55 @@
 
+// Traerme entrenadores pokemon aleatorios
+
+
+const getRandomUser = async () => {
+    try {
+        const myRandomUser = await fetch('https://randomuser.me/api/?results=2');
+        const userData = await myRandomUser.json();
+        
+        console.log('Mi usuario es', userData.results[0]);
+        console.log('Mi usuario es', userData.results[1]);
+
+        // constructor de entrenadores
+        class Entrenador {
+            constructor(nombre, apellido, apodo){
+                this.nombre = nombre;
+                this.apellido = apellido;
+                this.nick = apodo;
+            }
+        }
+        // Instacias entrenadores 
+        let entrenadorA = new Entrenador(userData.results[0].name.first, userData.results[0].name.last, userData.results[0].login.username);
+        let entrenadorB = new Entrenador(userData.results[1].name.first, userData.results[1].name.last, userData.results[1].login.username);
+
+        // los metemos en el dom
+        let selectorEntrenadorA = document.getElementById('entrenador1');
+        infoEntrenadorA = ` <div>
+                                <p>Maestro Pokemon: ${entrenadorA.nombre} ${entrenadorA.apellido}.</p> 
+                                <p>Alias: ${entrenadorA.nick}</p>
+                            </div>
+                            <img src="${userData.results[0].picture.large}" alt="foto">`;
+                            
+        selectorEntrenadorA.innerHTML = infoEntrenadorA
+
+        let selectorEntrenadorB = document.getElementById('entrenador2');
+        infoEntrenadorB = `<div>
+                                <p>Maestro Pokemon: ${entrenadorB.nombre} ${entrenadorB.apellido}.</p> 
+                                <p>Alias: ${entrenadorB.nick}</p>
+                            </div>
+                            <img src="${userData.results[1].picture.large}" alt="foto">`;
+        selectorEntrenadorB.innerHTML = infoEntrenadorB
+
+    }catch(error){
+        console.log(error)
+    }
+
+
+};
+getRandomUser();
+
+
+/////////////////////////////////////////////////////////////////////////////////
 
 const botonLuchar = document.getElementById('boton__luchar');
 
