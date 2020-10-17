@@ -71,3 +71,28 @@ input {
     padding: 1rem;
     border-radius: 3rem;
 }
+
+.pokelist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.pokeName {
+    background-color:white;
+    color:black;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.pokePhoto {
+    max-width: 9rem;
+}
+
+.jugador__title{
+    font-style: italic;
+    font-size: 3rem;
+    text-shadow: 3px 1px 0px red;
+    text-decoration: underline;
+}

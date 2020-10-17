@@ -6,9 +6,6 @@ const getRandomUser = async () => {
     try {
         const myRandomUser = await fetch('https://randomuser.me/api/?results=2');
         const userData = await myRandomUser.json();
-        
-        console.log('Mi usuario es', userData.results[0]);
-        console.log('Mi usuario es', userData.results[1]);
 
         // constructor de entrenadores
         class Entrenador {
@@ -49,7 +46,7 @@ const getRandomUser = async () => {
 getRandomUser();
 
 
-/////////////////////////////////////////////////////////////////////////////////
+// fin entrenadores/////////////////////////////////////////////////////////////////////////////////
 
 const botonLuchar = document.getElementById('boton__luchar');
 
@@ -92,55 +89,52 @@ function lucha (){
 
     var luchaIntervalo = setInterval(function(){ 
 
-                if( (vidaBulbasur && vidaEsquirtel) > 0){
+            if( (vidaBulbasur && vidaEsquirtel) > 0){
 
-                    player1();
-                    
-                    player2();
+                player1();
+                
+                player2();
 
-                    let paraIntroducir = document.getElementById('battle__transcurso');
-                    
+                let paraIntroducir = document.getElementById('battle__transcurso');
+                
 
-                    aMeter+= `<p>Squirtel ataca a Bulbasur y lo deja con ${vidaBulbasur} de vida</p>
-                    <p>Bulbasur ataca a Squirtel y lo deja con ${vidaEsquirtel} de vida</p>`;
+                aMeter+= `<p>Player1 ataca a Player2 y lo deja con ${vidaBulbasur} de vida</p>
+                <p>Player2 ataca a Player1 y lo deja con ${vidaEsquirtel} de vida</p>`;
 
-                    paraIntroducir.innerHTML = aMeter; 
-                    
+                paraIntroducir.innerHTML = aMeter; 
+                // console.log(aMeter);
+                // console.log(vidaEsquirtel, vidaBulbasur);
+            }else{
+                
+                clearInterval(luchaIntervalo);
 
-                    console.log(aMeter);
-                    console.log(vidaEsquirtel, vidaBulbasur);
+                let jugador1 = document.getElementById('jugador1');
+                let jugador2 = document.getElementById('jugador2');
 
-                    
+                if (vidaEsquirtel > 0){
+                    vencedor = vencedor + 'El ganador es Player1';
+                    jugador2.classList.remove('ganador__tamano');
+                    jugador1.classList.add('ganador__tamano');
                 }else{
+                    vencedor = vencedor + 'El ganador es Player2';
+                    jugador1.classList.remove('ganador__tamano');
+                    jugador2.classList.add('ganador__tamano');
+
+                }
+
+                let resultado = document.getElementById('battle__result');
+
+                let aInsertar = `
+                    <h3>${vencedor}</h3>
+                    `;
+
+                resultado.innerHTML = aInsertar;
+                
+                let ring = document.getElementById('battle__ring');
+                ring.classList.add('fondoNaranja');
                     
-                    clearInterval(luchaIntervalo);
-
-                    esquirtel = document.getElementById('squirtelId');
-                    bulbasur = document.getElementById('bulsaurId');
-
-                    if (vidaEsquirtel > 0){
-                        vencedor = vencedor + 'El ganador es Squirtel';
-                        bulbasur.classList.remove('ganador__tamano');
-                        esquirtel.classList.add('ganador__tamano');
-                    }else{
-                        vencedor = vencedor + 'El ganador es bulbasur';
-                        esquirtel.classList.remove('ganador__tamano');
-                        bulbasur.classList.add('ganador__tamano');
-                    }
-
-                    let resultado = document.getElementById('battle__result');
-
-                    let aInsertar = `
-                        <h3>${vencedor}</h3>
-                        `;
-
-                    resultado.innerHTML = aInsertar;
-                    
-                    let ring = document.getElementById('battle__ring');
-                    ring.classList.add('fondoNaranja');
-                        
-                    }
-        }, 500);
+            }
+    }, 500);
 
 }
 
@@ -158,3 +152,148 @@ botonLuchar.addEventListener('click', () => {
     localStorage.setItem("nombre", "Horse-Luis");
     sessionStorage.setItem("perico", "el de los palotes");
 })
+
+
+// Traigo Pokemos desde la api para jugador 1
+
+const getPokemons = async () =>{
+    try{
+
+        let llamoPokeApi = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10&offset=4');
+        let pokeList = await llamoPokeApi.json();
+
+        // array de resultados
+        let pokeArr = pokeList.results;
+
+        let pokeContent= '';
+        let pokeContentB = '';
+        for(let i of pokeArr.slice(0,5)){
+                // saco los nombres de los pokemons
+            let pokeNombre = i.name;
+            // console.log(pokeNombre);
+
+            // llamo a la api personal de cada uno para sacar su imagen
+            let llamoPokemonPage = await fetch(i.url);
+            let pokePage = await llamoPokemonPage.json();
+            let pokeImage = pokePage.sprites.other.dream_world.front_default;
+            // console.log(pokePage);
+            let pokeId = pokePage.id;
+            
+            pokeContent += `<div id="${pokeId}">
+                                <h5 class="pokeName">${pokeNombre}</h5>
+                                <img class="pokePhoto" src=${pokeImage} alt=${pokeNombre}>
+                            </div>`;
+
+            let etiquetaPokelist = document.getElementById('pokelist');
+
+            etiquetaPokelist.innerHTML = pokeContent;
+        }
+        for(let i of pokeArr.slice(5)){
+        let pokeNombre = i.name;
+        let llamoPokemonPage = await fetch(i.url);
+        let pokePage = await llamoPokemonPage.json();
+        let pokeImage = pokePage.sprites.other.dream_world.front_default;
+        let pokeId = pokePage.id;
+        pokeContentB += `<div id="${pokeId}">
+                            <h5 class="pokeName">${pokeNombre}</h5>
+                            <img class="pokePhoto" src=${pokeImage} alt=${pokeNombre}>
+                        </div>`;
+
+        let etiquetaPokelistB = document.getElementById('pokelistB');
+
+        etiquetaPokelistB.innerHTML = pokeContentB;
+    }
+
+    }catch(error){
+        console.log(error)
+    }
+}
+
+getPokemons();
+
+
+// SELECCIONAR POKEMON JUGADOR 1
+
+let jugador1 = document.getElementById('jugador1');
+
+  
+
+setTimeout(function(){
+    let charmeleon = document.getElementById('5');
+    // console.log(charmeleon);
+    charmeleon.addEventListener('click',()=>{
+        jugador1.innerHTML = charmeleon.outerHTML ; 
+    });
+}, 3000);
+
+setTimeout(function(){
+    let charizard = document.getElementById('6');
+    charizard.addEventListener('click',()=>{
+        jugador1.innerHTML = charizard.outerHTML ; 
+    });
+}, 3000);
+
+setTimeout(function(){
+    let squirtle = document.getElementById('7');
+    squirtle.addEventListener('click',()=>{
+        jugador1.innerHTML = squirtle.outerHTML ; 
+    });
+}, 3000);
+
+setTimeout(function(){
+    let wartortle = document.getElementById('8');
+    wartortle.addEventListener('click',()=>{
+        jugador1.innerHTML = wartortle.outerHTML ; 
+    });
+}, 3000);
+
+setTimeout(function(){
+    let blastoise = document.getElementById('9');
+    blastoise.addEventListener('click',()=>{
+        jugador1.innerHTML = blastoise.outerHTML ; 
+    });
+}, 3000);
+
+
+
+// SELECCIONAR POKEMON JUGADOR 2
+
+let jugador2 = document.getElementById('jugador2');
+
+
+setTimeout(function(){
+    let caterpie = document.getElementById('10');
+    caterpie.addEventListener('click',()=>{
+        jugador2.innerHTML = caterpie.outerHTML ; 
+    });
+}, 3000);
+
+setTimeout(function(){
+    let metapod = document.getElementById('11');
+    metapod.addEventListener('click',()=>{
+        jugador2.innerHTML = metapod.outerHTML ; 
+    });
+}, 3000);
+
+setTimeout(function(){
+    let buterfree = document.getElementById('12');
+    buterfree.addEventListener('click',()=>{
+        jugador2.innerHTML = buterfree.outerHTML ; 
+    });
+}, 3000);
+
+setTimeout(function(){
+    let weedle = document.getElementById('13');
+    weedle.addEventListener('click',()=>{
+        jugador2.innerHTML = weedle.outerHTML ; 
+    });
+}, 3000);
+
+setTimeout(function(){
+    let kakuna = document.getElementById('14');
+    kakuna.addEventListener('click',()=>{
+        jugador2.innerHTML = kakuna.outerHTML ; 
+    });
+}, 3000);
+
+

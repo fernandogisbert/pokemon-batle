@@ -25,8 +25,11 @@
                         <input id="defensa__esquirtel"  max="5" type="number">
                     </label>
                 </div>
-                <img class="pokemon__img " id="squirtelId" src="img/squirtel-removebg-preview.png" alt="squirtel">
-
+                <div class="jugador1_section">
+                    <h2 class="jugador__title">Player 1</h2>
+                    <div id="jugador1" class="pokemon__img">
+                    </div>
+                </div>
             </div>
             <div id="battle__ring">
                 <div id="battle__transcurso">
@@ -50,12 +53,26 @@
                         <input id="defensa__bulbasur"  max="5" type="number">
                     </label class="marcador">
                 </div>
-                <img class="pokemon__img " id="bulsaurId" src="img/bulbasur-removebg-preview.png" alt="bulbasur">
-
+                <div class="jugador2_section">
+                    <h2 class="jugador__title">Player 2</h2>
+                    <div id="jugador2" class="pokemon__img">
+                    </div>
+                </div>
             </div>
         </main>
-        <div id='lista_A'></div>
-        <div id='lista_B'></div>
+        <section>
+            <div class="container">
+                <h4>Pokemons for player 1</h4>
+                <section id="pokelist" class="pokelist">
+
+                </section>
+                <h4>Pokemons for player 2</h4>
+                <section id="pokelistB" class="pokelist">
+
+                </section>
+            </div>
+        </section>
+        
         <div class="start">
             <img class="start__button" id="boton__luchar" src="img/start.png" alt="empezar">
         </div>
