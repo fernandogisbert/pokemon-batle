@@ -216,7 +216,6 @@ getPokemons();
 
 let jugador1 = document.getElementById('jugador1');
 
-  
 
 setTimeout(function(){
     let charmeleon = document.getElementById('5');
